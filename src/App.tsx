@@ -1,9 +1,15 @@
 
+import { BrowserRouter } from "react-router-dom"
+import AppRoutes from "./Routes/Approutes"
+import ScrollToTop from "./component/ScrollTop"
 function App() {
 
   return (
     <div>
-      <h1 className="text-green-200 font-bold text-9xl">Hello Pacento</h1>
+    <BrowserRouter>
+      <ScrollToTop />
+      <AppRoutes/>
+    </BrowserRouter>
     </div>
      )
 }

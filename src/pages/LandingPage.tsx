@@ -1,5 +1,4 @@
 
-import React from 'react'
 import Header from '../component/Header'
 import { HeroSection } from '../component/Hero'
 import AboutSection from '../component/About'
@@ -18,8 +17,6 @@ export default function LandingPage() {
 
       </div>
       <FooterSection/>
-     
-     
     </div>
   )
 }

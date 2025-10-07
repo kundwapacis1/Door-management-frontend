@@ -16,74 +16,70 @@ const navLinks: NavLink[] = [
 ];
 
 const Header: React.FC = () => {
-  // State to manage the visibility of the mobile menu
   const [isOpen, setIsOpen] = useState(false);
 
+  const headerStyle: React.CSSProperties = {
+    background: "#2c3e50", // Same as sidebar background
+    boxShadow: "0 2px 6px rgba(0,0,0,0.15)",
+    position: "fixed",
+    width: "100%",
+    zIndex: 50,
+  };
+
+  const navLinkStyle: React.CSSProperties = {
+    color: "#fff",
+    padding: "10px",
+    borderRadius: "5px",
+    textDecoration: "none",
+    fontWeight: "bold",
+  };
+
+  
+
   return (
-    // Outer container for the header, applying the dark background
-    <header className="bg-gray-900 shadow-md fixed w-full z-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo/Title Section */}
-          <div className="flex-shrink-0">
-            <a href="/" className="text-white text-xl font-semibold tracking-wider">
-              Smart Door Manager
-            </a>
-          </div>
+    <header style={headerStyle}>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "10px 20px" }}>
+        {/* Logo/Title */}
+        <div style={{ color: "#fff", fontSize: "20px", fontWeight: "bold" }}>
+          Smart Door Manager
+        </div>
 
-          {/* Desktop Navigation Links (Visible on large screens) */}
-          <nav className="hidden md:block">
-            <div className="ml-10 flex items-baseline space-x-4">
-              {navLinks.map((link) => (
-                <a
-                  key={link.name}
-                  href={link.to}
-                  className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition duration-150 ease-in-out"
-                >
-                  {link.name}
-                </a>
-              ))}
-            </div>
-          </nav>
+        {/* Desktop Navigation */}
+        <nav style={{ display: "flex", gap: "15px" }}>
+          {navLinks.map((link) => (
+            <Link key={link.name} to={link.to} style={navLinkStyle}>
+              {link.name}
+            </Link>
+          ))}
+        </nav>
 
-          {/* Mobile Menu Button (Visible on small screens) */}
-          <div className="md:hidden">
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="bg-gray-800 inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
-              aria-expanded={isOpen}
-            >
-              <span className="sr-only">Open main menu</span>
-              {/* Icon when menu is closed (Hamburger) */}
-              {!isOpen ? (
-                <svg className="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
-                </svg>
-              ) : (
-                /* Icon when menu is open (X or Close) */
-                <svg className="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              )}
-            </button>
-          </div>
+        {/* Mobile Menu Button */}
+        <div style={{ display: "none" /* Show with media queries if needed */ }}>
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            style={{
+              background: "#34495e",
+              padding: "8px",
+              borderRadius: "5px",
+              border: "none",
+              cursor: "pointer",
+            }}
+          >
+            ☰
+          </button>
         </div>
       </div>
 
-      {/* Mobile Menu Panel (Hidden by default, shown when isOpen is true) */}
-      <div className={`md:hidden ${isOpen ? 'block' : 'hidden'}`}>
-        <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+      {/* Mobile Menu */}
+      {isOpen && (
+        <div style={{ display: "flex", flexDirection: "column", padding: "10px" }}>
           {navLinks.map((link) => (
-            <Link
-              key={link.name}
-              to={link.to}
-              className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium transition duration-150 ease-in-out"
-            >
+            <Link key={link.name} to={link.to} style={navLinkStyle}>
               {link.name}
             </Link>
           ))}
         </div>
-      </div>
+      )}
     </header>
   );
 };

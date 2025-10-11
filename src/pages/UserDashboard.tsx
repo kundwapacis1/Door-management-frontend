@@ -5,7 +5,7 @@ import Header from "../component/Header";
 const Dashboard: React.FC = () => {
   const sidebarStyle: React.CSSProperties = {
     width: "250px",
-    background: "#2c3e50",
+    background: "#154576", // Primary color from contact section
     color: "#fff",
     height: "100vh",
     padding: "20px",
@@ -15,6 +15,7 @@ const Dashboard: React.FC = () => {
     display: "flex",
     flexDirection: "column",
     gap: "20px",
+    boxShadow: "2px 0 6px rgba(0,0,0,0.1)"
   };
 
   const sidebarLinkStyle: React.CSSProperties = {
@@ -30,8 +31,9 @@ const Dashboard: React.FC = () => {
   const mainContentStyle: React.CSSProperties = {
     marginLeft: "270px",
     padding: "20px",
-    backgroundColor: "#f4f4f4",
+    backgroundColor: "#f9fafb", // Light background like contact section
     minHeight: "100vh",
+    color: "#1f2937"
   };
 
   const cardStyle: React.CSSProperties = {

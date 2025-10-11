@@ -5,6 +5,8 @@ import {LoginPage} from '../pages/LoginPage';
 import DoorControlPage from '../pages/DoorControlPage';
 import ViewLogsPage from '../pages/ViewLogsPage';
 import UserDashboard from '../pages/UserDashboard';
+import AdDashboard from '../pages/AdDashboard';
+import ProtectedRoute from '../component/ProtectedRoute';
 
 
 export default function AppRoutes() {
@@ -13,9 +15,26 @@ export default function AppRoutes() {
       <Routes>
          <Route path='/' element={<LandingPage/>}/>
          <Route path='/login' element={<LoginPage/>}/>
-         <Route path="/userdashboard" element={<UserDashboard />} />
-        <Route path="/door-control" element={<DoorControlPage />} />
-        <Route path="/view-logs" element={<ViewLogsPage />} />
+         <Route path="/userdashboard" element={
+           <ProtectedRoute requiredRole="user">
+             <UserDashboard />
+           </ProtectedRoute>
+         } />
+         <Route path="/admindashboard" element={
+           <ProtectedRoute requiredRole="admin">
+             <AdDashboard />
+           </ProtectedRoute>
+         } />
+        <Route path="/door-control" element={
+          <ProtectedRoute>
+            <DoorControlPage />
+          </ProtectedRoute>
+        } />
+        <Route path="/view-logs" element={
+          <ProtectedRoute>
+            <ViewLogsPage />
+          </ProtectedRoute>
+        } />
       </Routes>
     </div>
   )
